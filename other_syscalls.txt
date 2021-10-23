@@ -1,0 +1,7 @@
+
+11 -> print byte in $a0
+      lb $a0, 0x3 would load the byte in memory address 0x3 into $a0
+
+NB: When loading the value of a register as a byte into another register use parenthesis
+for that register
+lb $v0, ($t0)
