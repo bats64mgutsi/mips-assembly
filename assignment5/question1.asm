@@ -2,63 +2,48 @@
 
 main:
   la $a0, askForInputStr
-  la $v1, Cont1
-  j Print
+  jal Print
 
-  Cont1:
   li $a1, 20
 
   la $a0, str1Buffer
-  la $t0, Cont2
-  j ReadString
+  jal ReadString
   
-  Cont2:
   la $a0, str2Buffer
-  la $t0, Cont3
-  j ReadString  
+  jal ReadString  
 
-  Cont3:
   la $a0, str3Buffer
-  la $t0, Cont4
-  j ReadString
+  jal ReadString
 
   # Printing
 
-  Cont4:
   la $a0, displayOutputStr
-  la $v1, Cont4a
-  j Print
+  jal Print
 
-  Cont4a:
   la $a0, str3Buffer
-  la $v1, Cont5
-  j Print
+  jal Print
 
-  Cont5:
   la $a0, str1Buffer
-  la $v1, Cont6
-  j Print
+  jal Print
 
-  Cont6:
   la $a0, str2Buffer
-  la $v1, Exit
+  la $ra, Exit
   j Print
 
 ReadString:
   # The address to write the input to should be in
   # $a0. And $a1 contains the nr of characters to read.
-  # $t0 is the return address
+  # $ra is the return address
   li $v0, 8
   syscall
-  jr $t0
+  jr $ra
 
 Print:
   # $a0 should be initialised to the address of string to print
-  # $a1 should contain the return address
+  # $ra should contain the return address
   li $v0, 4
   syscall
-  jr $v1
-
+  jr $ra
 
 Exit:
   li $v0, 10
